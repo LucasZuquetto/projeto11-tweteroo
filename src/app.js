@@ -16,7 +16,17 @@ server.post('/sign-up', (req, res) => {
         return
     }
     users.push(req.body)
-    res.status(200).send('OK')
+    res.status(201).send('OK')
+})
+
+server.post('/tweets', (req, res) => {
+    const {username, tweet} = req.body
+    if(!username || !tweet){
+        res.status(400).send('Todos os campos são obrigatórios!')
+        return
+    }
+    tweets.push(req.body)
+    res.status(201).send("OK")
 })
 
 server.listen(5000,() => console.log('listening on port 5000'))
