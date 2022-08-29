@@ -29,4 +29,13 @@ server.post('/tweets', (req, res) => {
     res.status(201).send("OK")
 })
 
+server.get('/tweets', (req, res) => {
+    tweets.forEach(tweet => {
+        const user = users.find(user => tweet.username === user.username)
+        tweet.avatar = user.avatar
+    })
+    const lastTweets = tweets.slice(-10)
+    res.send(lastTweets)
+})
+
 server.listen(5000,() => console.log('listening on port 5000'))
